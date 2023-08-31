@@ -1,6 +1,6 @@
 import BrandImgShort from '../assets/imgs/logo-mim.png'
 import BrandImgLong from '../assets/imgs/logo-mim-long.png'
-import { useEffect, useRef, useState } from 'react'
+import { useState } from 'react'
 import { HiMenu } from 'react-icons/hi'
 import { IoIosArrowDown, IoIosClose } from 'react-icons/io'
 import { Popup, Register } from './modal'
@@ -86,7 +86,7 @@ window.addEventListener('scroll', handleScrolling)
 const renderMenuNav = () => {
       if (screenView == 'mobile' || screenView == 'tablet') {
         return <nav 
-                  className={`mobile ${!isOpen && scrollPx == 100 && !isShowNav ? ' -top-80 transition-all ease-in-out duration-500' : 'top-0 transition-all ease-out duration-500'} fixed w-full h-[9vh] md:h-[8vh] fixed px-10 md:px-20 flex justify-between items-center shadow-[3px_0px_10px_1px_rgba(0,0,0,0.40)] z-50`}
+                  className={`mobile ${!isOpen && scrollPx == 100 && !isShowNav ? ' -top-80 transition-all ease-in-out duration-500' : 'top-0 transition-all ease-out duration-500'} w-full h-[9vh] md:h-[8vh] fixed px-10 md:px-20 flex justify-between items-center shadow-[3px_0px_10px_1px_rgba(0,0,0,0.40)] z-50`}
                   style={{backgroundColor: `rgba(229,186,115,${scrollPx}%)`}}
                   >
                   {isOpen ? 
@@ -229,8 +229,8 @@ const renderMenuNav = () => {
     <>
     {renderMenuNav()}
     {isShowRegister && <Register setIsShow={setIsShowRegister}/>}
-    {isShowPopup && <Popup bgClose={true} btnCancel={true} linkTo={linkTo.join} title={`Simak ${linkTo.title}`} content={<span className='text-center text-[20px]'><p>Yang berlangsung<p>{linkTo.date}</p> Pada pukul {linkTo.time} WIB</p></span>} setIsShow={setIsShowPopup} classnameBtn={'rounded-lg font-[600] hover:bg-[#C58940] transition-all duration-600 text-[#C58940] hover:text-white'}/>}
-    {isShowPopupAfterSignUp && <Popup title={`Verifikasi Email`} content={<span className='text-center text-[20px]'><p>Lakukan verifikasi email untuk menyelasaikan pembuatan akun.</p></span>} eventOnClick={setIsShowPopupAfterSignUp} setIsShow={setIsShowPopupAfterSignUp} classnameBtn={'rounded-lg font-[600] hover:bg-[#C58940] transition-all duration-600 text-[#C58940] hover:text-white'}/>}
+    {isShowPopup && <Popup bgClose={true} btnCancel={true} linkTo={linkTo.join} title={`Simak ${linkTo.title}`} content={<span className='text-center text-[20px]'><p>Yang berlangsung<p>{linkTo.date}</p> Pada pukul {linkTo.time} WIB</p></span>} setIsShow={setIsShowPopup}/>}
+    {isShowPopupAfterSignUp && <Popup title={`Verifikasi Email`} content={<span className='text-center text-[20px]'><p>Lakukan verifikasi email untuk menyelasaikan pembuatan akun.</p></span>} eventOnClick={()=>setIsShowPopupAfterSignUp(false)} setIsShow={setIsShowPopupAfterSignUp}/>}
     </>
   )
 }

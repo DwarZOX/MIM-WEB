@@ -1,6 +1,6 @@
 import axios from "axios";
 const instance = axios.create({
-    baseURL: 'http://mim.muhammadiyahexpo.com/api'
+    baseURL: 'https://frontendreq.pondokprogrammer.com/api',
 })
 
 export default instance

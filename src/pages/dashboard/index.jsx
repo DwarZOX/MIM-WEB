@@ -1,4 +1,4 @@
-import { Navigate, Route, Routes } from "react-router-dom"
+import { Navigate, Route, Routes, useNavigate } from "react-router-dom"
 import { Sidebar } from "../../components"
 import Main from "./Main"
 import Admins from "./Admins"
@@ -8,8 +8,20 @@ import CreateEvent from "./CreateEvent"
 import Article from "./Article"
 import CreateArticle from "./CreateArticle"
 import AboutMe from "./AboutMe"
+import { useEffect } from "react"
+import Cookies from "js-cookie"
 
 const Dashboard = () => {
+  const navigate = useNavigate()
+  useEffect(() => {
+    const checkUserToken = () => {
+      const datasCookie = Cookies.get('token')
+      if(datasCookie == '' || datasCookie == undefined) {
+        navigate('/dashboard/masuk')
+      }
+    }
+    checkUserToken()
+  }, [navigate])
   return (
     <div className="w-full bg-[#E5BA73] flex">
       <Sidebar/>

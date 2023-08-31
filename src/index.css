@@ -94,4 +94,6 @@
     }
   }
 
-  body {background-color: #FAF8F1;}
+  body {background-color: #FAF8F1; box-sizing: border-box;}
+ 
+

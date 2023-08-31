@@ -18,10 +18,10 @@ const InputCustom = ({type = 'text',placeholder,id,name,value,eventOnChange,disa
                                     className={`${className} bg-transparent text-white`} 
                                     />
                                       {isShow ? 
-                                              <BsEyeSlash  className='text-xl text-white md:text-[28px] text-white mr-2 cursor-pointer' 
+                                              <BsEyeSlash  className='text-xl md:text-[28px] text-white mr-2 cursor-pointer' 
                                               onClick={()=>setIsShow(!isShow)}/> 
                                               : 
-                                              <BsEye  className='text-xl text-white md:text-[28px] text-white mr-2 cursor-pointer' 
+                                              <BsEye  className='text-xl md:text-[28px] text-white mr-2 cursor-pointer' 
                                               onClick={()=>setIsShow(!isShow)}/>}
                                   </div>{showError && <p className='text-red-700'>password not match!</p>}
                                 </> 

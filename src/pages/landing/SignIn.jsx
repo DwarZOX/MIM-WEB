@@ -4,20 +4,34 @@ import { Link, useNavigate } from 'react-router-dom'
 import brandMIM from '../../assets/imgs/logo-mim-long.png'
 import instance from '../../services/api/api'
 import { useState } from 'react'
+import { useEffect } from 'react'
+import Cookies from 'js-cookie'
 
 const SignIn = () => {
   const navigate = useNavigate()
-  const [formData,setFormData] = useState([{
-    email: '',
-    password: '',
-  }])
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+  const [rememberMe, setRememberMe] = useState(false)
+  
+  useEffect(() => {
+    const datasCookie = Cookies.get('data_login')
+    if(datasCookie) {
+      const { email, password, rememberMe } = JSON.parse(datasCookie)
+      setEmail(email)
+      setPassword(password)
+      setRememberMe(rememberMe)
+    } else {
+      navigate('/dashboard/masuk')
+    }
+  },[navigate])
+  
 
   const handleSubmit = (e) => {
     e.preventDefault()
 
     let data = new FormData();
-    data.append('email', formData.email);
-    data.append('password', formData.password);
+    data.append('email', email);
+    data.append('password', password);
 
     let config = {
       method: 'post',
@@ -39,30 +53,37 @@ const SignIn = () => {
         }else {
           alert('Gagal masuk akun. Coba lagi!')
         }
+        Cookies.remove('token')
       } else {
+        Cookies.set('token', response.data.token)
+        if(rememberMe){
+          Cookies.set('data_login',JSON.stringify({email,password,rememberMe}),{expires: 7})
+        } else {
+          Cookies.remove('data_login')
+        }
         navigate('/dashboard/')
         alert('Berhasil masuk')
+
       }
     })
     .catch((error) => {
       console.log(error);
     });
   }
-
   return (
     <>
         <section className='absolute top-0 bg-gradient-to-t lg:bg-gradient-to-l from-[#C58940] from-1% lg:from-5% to-[#FAEAB1] to-8% lg:via-[#FAEAB1] lg:to-[#FFFFFF] text-[#C58940] flex flex-col lg:flex-row lg:px-10 items-center justify-evenly bottom-0 gap-y-5 left-0 right-0'>
           <div className='w-1/2 lg:mb-20'>
-            <img src={brandMIM} alt="Your Logo" />
+            <Link to={'/'}><img src={brandMIM} alt="Your Logo" /></Link>
           </div>
           <div className='max-w-[98%] md:w-[70%] lg:w-[40%]'>
             <form className='p-5 bg-[lightgray]/20 backdrop-blur-sm rounded-xl text-center shadow-[0px_0px_9px_rgba(0,0,0,0.3)]' onSubmit={(e)=>handleSubmit(e)}>
               <h1 className='text-2xl md:text-[35px] text-white font-[700] mb-5 mt-2 '>Masuk Dashboard</h1>
-              <InputCustom type='email' placeholder={'Email'} value={formData.email} eventOnChange={(e)=>setFormData({...formData, email: e.target.value})} className={'md:text-[26px] focus:ring-0 border-none outline-none w-full md:w-[90%] py-3 px-4 text-white placeholder:text-white'} classNameDiv={'border-b-[1.7px] border-white'} icon={<CiMail className='text-xl md:text-[28px] text-white'/>}/>
-              <InputCustom type='password' placeholder={'Kata Sandi'} value={formData.password} eventOnChange={(e)=>setFormData({...formData, password: e.target.value})} className={'md:text-[26px] focus:ring-0 border-none outline-none w-full md:w-[90%] py-3 px-4 text-white placeholder:text-white'} classNameDiv={'border-b-[1.7px] border-white'} icon={<CiLock className='text-xl md:text-[28px] text-white'/>}/>
+              <InputCustom type='email' placeholder={'Email'} value={email} eventOnChange={(e)=>setEmail(e.target.value)} className={'md:text-[26px] focus:ring-0 border-none outline-none w-full md:w-[90%] py-3 px-4 text-white placeholder:text-white'} classNameDiv={'border-b-[1.7px] border-white'} icon={<CiMail className='text-xl md:text-[28px] text-white'/>}/>
+              <InputCustom type='password' placeholder={'Kata Sandi'} value={password} eventOnChange={(e)=>setPassword(e.target.value)} className={'md:text-[26px] focus:ring-0 border-none outline-none w-full md:w-[90%] py-3 px-4 text-white placeholder:text-white'} classNameDiv={'border-b-[1.7px] border-white'} icon={<CiLock className='text-xl md:text-[28px] text-white'/>}/>
               <div className='flex justify-between items-center mt-14'>
               <span className='flex items-center gap-x-2 text-[12px] md:text-[17px] font-[600] text-white ml-1'>
-              <InputCustom type={'checkbox'} className={'rounded-full text-[#C58940]'} id={'remember'}/>
+              <InputCustom type={'checkbox'} value={rememberMe} eventOnChange={(e)=>setRememberMe(e.target.checked)} className={'rounded-full text-black'} id={'remember'}/>
               <label htmlFor="remember">Ingatkan saya</label></span>
               <span className='text-[13px] md:text-[21px] mr-1 text-white'>
                 <Link to={'reset-password'}>Lupa kata sandi?</Link>

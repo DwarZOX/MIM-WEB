@@ -65,7 +65,7 @@ const handleSubmit = (e) => {
     <>
         <section className='absolute top-0 bg-[lightgray]/20 backdrop-blur-sm bottom-0 left-0 right-0 flex flex-col lg:flex-row lg:px-10 items-center justify-evenly gap-y-5'>
           <div className='w-1/2 md:w-1/1 lg:mb-20'>
-            <img src={brandMIM} alt="Your Logo" />
+            <Link to={'/'}><img src={brandMIM} alt="Your Logo" /></Link>
           </div>
           <div className='max-w-[98%] md:w-[70%] lg:w-[40%]'>
             <form className='p-5 bg-gradient-to-l from-[#C58940] from-20% via-[#E5BA73] via-45% to-[#FAEAB1] backdrop-blur-sm rounded-xl text-center shadow-[0px_0px_9px_rgba(0,0,0,0.3)]' onSubmit={(e)=>handleSubmit(e)}>
