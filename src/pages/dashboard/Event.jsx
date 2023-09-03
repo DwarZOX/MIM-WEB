@@ -83,7 +83,7 @@ setSearchFilteredResult(filteredDataSearch)
       ) : (
         searchFilteredResult.map((data) => (
           <article key={data.id}
-          className='flex order-2 bg-[lightgray]/40 hover:bg-[lightgray] backdrop-blur-md mx-auto w-[79vw] md:w-[67vw] lg:w-[40vw] mb-5 h-fit gap-5 even:border-black border-l-[11px] rounded-xl hover:translate-y-8 md:hover:translate-y-10 hover:mb-20 md:hover:mb-[100px] hover:scale-110 transition-all duration-300 relative'
+          className='flex order-2 bg-[lightgray]/40 hover:bg-[lightgray] backdrop-blur-md mx-auto w-[85vw] md:w-[67vw] lg:w-[40vw] mb-5 h-fit gap-5 even:border-black border-l-[11px] rounded-xl hover:translate-y-8 md:hover:translate-y-10 hover:mb-20 md:hover:mb-[100px] hover:scale-110 transition-all duration-300 relative'
           > 
             <img src={data.img} className='w-[150px] md:w-[210px] rounded-lg' alt="Tumbnail" />
             <span className='w-full flex-col overflow-hidden gap-y-2 flex items-start justify-center'>

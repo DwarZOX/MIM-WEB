@@ -83,7 +83,7 @@ const SignIn = () => {
               <InputCustom type='password' placeholder={'Kata Sandi'} value={password} eventOnChange={(e)=>setPassword(e.target.value)} className={'md:text-[26px] focus:ring-0 border-none outline-none w-full md:w-[90%] py-3 px-4 text-white placeholder:text-white'} classNameDiv={'border-b-[1.7px] border-white'} icon={<CiLock className='text-xl md:text-[28px] text-white'/>}/>
               <div className='flex justify-between items-center mt-14'>
               <span className='flex items-center gap-x-2 text-[12px] md:text-[17px] font-[600] text-white ml-1'>
-              <InputCustom type={'checkbox'} value={rememberMe} eventOnChange={(e)=>setRememberMe(e.target.checked)} className={'rounded-full text-black'} id={'remember'}/>
+              <InputCustom type={'checkbox'} value={rememberMe} required={false} eventOnChange={(e)=>setRememberMe(e.target.checked)} className={'rounded-full text-black'} id={'remember'}/>
               <label htmlFor="remember">Ingatkan saya</label></span>
               <span className='text-[13px] md:text-[21px] mr-1 text-white'>
                 <Link to={'reset-password'}>Lupa kata sandi?</Link>

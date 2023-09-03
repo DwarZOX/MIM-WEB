@@ -86,7 +86,6 @@ const modules = {
     });
 
 
-    console.log(title,photo,author,content)
   }
 
   return (
@@ -94,7 +93,7 @@ const modules = {
       <header className="hidden md:block py-4 bg-gradient-to-b from-[#E5BA73] to-[#FAEAB1] shadow-[6px_1px_10px_rgba(0,0,0,0.6)]">
         <h1 className="ml-10 font-bold text-[20px] text-white">Buat Artikel</h1>
       </header>
-      <form className="flex flex-col w-full gap-y-4 md:mt-3 px-4" onSubmit={handleSubmit}>
+      <form className="flex flex-col w-full gap-y-4 md:mt-3 md:px-10 px-4" onSubmit={handleSubmit}>
         <InputCustom placeholder={'Masukan judul Artikel'} className={'rounded-lg border-none w-full text-[22px] py-3 bg-white/70'} value={title} eventOnChange={(e)=>setTitle(e.target.value)}/>
         <InputCustom placeholder={'Masukan penulis'} className={'rounded-lg border-none w-full text-[22px] py-3 bg-white/70'} value={author} eventOnChange={(e)=>setAuthor(e.target.value)}/>
         <label tabIndex={0} htmlFor="tambah" title="Unggah Gambar" className="flex justify-center items-center cursor-pointer w-full h-[30vh] p-1 lg:h-[35vh] rounded-xl border-2 border-[#E5BA73] hover:border-white/70">
@@ -109,11 +108,11 @@ const modules = {
                     <input id="tambah" type="file" className="hidden" onChange={handleInputImg} />
                     <p className="text-md py-5 md:pt-10 hidden">Tambah Gambar</p>
                   </div>
-                </label>
+        </label>
         <div className="w-full h-[35vh] max-h-[60vh] md:max-h-[40vh] lg:max-h-[25vh] overflow-hidden">
           <ReactQuill className="max-w-full h-[35vh] max-h-[60vh] md:max-h-[40vh] lg:max-h-[25vh] overflow-y-scroll border-2 rounded-lg border-white/70" theme="snow" value={content} onChange={setContent} modules={modules}/>
         </div>
-        <ButtonCustom type="submit" value={'Buat'} className={'border-[#E5BA73] border-2 hover:border-white hover:text-white hover:bg-white/40 font-bold text-[22px] rounded-lg py-2'}/>
+        <ButtonCustom type="submit" value={'Buat'} className={'border-[#E5BA73] border-2 hover:border-white hover:text-white bg-white/70 hover:bg-white/40 font-bold text-[22px] rounded-lg py-2'}/>
       </form>
 
       {/* <div className="max-w-screen-md max-h-screen break-words" dangerouslySetInnerHTML={{ __html:content}}/> */}

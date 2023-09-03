@@ -12,7 +12,7 @@ const AboutMe = () => {
       <header className="hidden md:block py-4 bg-gradient-to-b from-[#E5BA73] to-[#FAEAB1] shadow-[6px_1px_10px_rgba(0,0,0,0.6)]">
         <h1 className="ml-10 font-bold text-[20px] text-white">Informasi Saya</h1>
       </header>
-      <main className="flex flex-col md:flex-row gap-x-10 items-center mt-20 text-[#C58940] my-5 mx-auto rounded-md bg-[white]/50 backdrop-blur-sm w-fit">
+      <main className="flex flex-col md:flex-row gap-x-10 items-center mt-20 lg:mt-10 text-[#C58940] my-5 mx-auto rounded-md bg-[white]/50 backdrop-blur-sm w-fit">
       <section className="flex flex-col p-5 items-center justify-center mx-auto rounded-md bg-[white]/40 backdrop-blur-sm md:flex-1">
         <div className="rounded-full w-40 h-40 mb-2 cursor-pointer shadow-[inset_0px_0px_10px_rgba(0,0,0,0.5)] bg-white text-[80px] font-semibold text-[#E5BA73] flex justify-center items-center ">
           {getInitial(name)}
@@ -29,9 +29,9 @@ const AboutMe = () => {
           <p>Email</p>
           <InputCustom className="rounded-xl bg-[gray]/30 w-full py-4 px-2 mb-10 text-[23px] border-0 border-b-2 border-t-2 focus:ring-0 font-medium" value={'edward@gmail.com'} disabled={false}/>
           <p>Kata sandi</p>
-          <InputCustom className="rounded-xl bg-[gray]/30 w-full py-4 px-2 mb-10 text-[23px] border-0 border-b-2 border-t-2 focus:ring-0 font-medium" value={'pass'} disabled={false}/>
+          <InputCustom className="rounded-xl bg-[gray]/30 w-full py-4 px-2 mb-10 text-[23px] border-0 border-b-2 border-t-2 focus:ring-0 font-medium" value={'**********'} disabled={false}/>
           <p>Konfirmasi kata sandi</p>
-          <InputCustom className="rounded-xl bg-[gray]/30 w-full py-4 px-2 mb-10 text-[23px] border-0 border-b-2 border-t-2 focus:ring-0 font-medium" value={'pass'} disabled={false}/>
+          <InputCustom className="rounded-xl bg-[gray]/30 w-full py-4 px-2 mb-10 text-[23px] border-0 border-b-2 border-t-2 focus:ring-0 font-medium" value={'**********'} disabled={false}/>
           <ButtonCustom type="submit" value={'SIMPAN'} className={'rounded-xl py-4 px-2 bg-white font-bold'}/>
         </form>
       </main>
