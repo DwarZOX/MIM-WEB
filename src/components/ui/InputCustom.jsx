@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { BsEyeSlash, BsEye } from 'react-icons/bs'
 
-const InputCustom = ({type = 'text',placeholder,id,name,value,eventOnChange,disabled,labelFor,labelValue,className,classNameDiv,icon}) => {
+const InputCustom = ({type = 'text',placeholder,id,name,value,eventOnChange,disabled,labelFor,labelValue,className,classNameDiv,icon,hidden}) => {
     const [isShow, setIsShow] = useState(false)
     const showError = false
   return (
@@ -16,7 +16,8 @@ const InputCustom = ({type = 'text',placeholder,id,name,value,eventOnChange,disa
                                     value={value} 
                                     onChange={eventOnChange}
                                     className={`${className} bg-transparent text-white`} 
-                                    />
+                                    hidden={hidden}
+                                    required/>
                                       {isShow ? 
                                               <BsEyeSlash  className='text-xl md:text-[28px] text-white mr-2 cursor-pointer' 
                                               onClick={()=>setIsShow(!isShow)}/> 
@@ -39,7 +40,8 @@ const InputCustom = ({type = 'text',placeholder,id,name,value,eventOnChange,disa
                                 placeholder={placeholder} 
                                 className={`${className} bg-transparent text-white`} 
                                 disabled={disabled}
-                                />
+                                hidden={hidden}
+                                required/>
                                 <label 
                                 htmlFor={labelFor} 
                                 className='cursor-pointer'

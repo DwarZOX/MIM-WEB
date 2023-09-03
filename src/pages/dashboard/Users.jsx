@@ -1,16 +1,22 @@
+
 import { useEffect, useState } from 'react'
 import avatar from '../../assets/imgs/logo-mim.png'
-import { useSteteContext } from '../../context/StateContext'
 import { InputCustom } from '../../components/ui'
-import { IoMdSearch } from 'react-icons/io';
-import { MdMoreVert } from 'react-icons/md';
-import { Popup } from '../../components/modal';
+import { IoMdInformationCircle, IoMdSearch, IoMdTrash } from 'react-icons/io';
+import { Popup } from '../../components/modal';import {
+  SwipeableList,
+  SwipeableListItem,
+  SwipeAction,
+  TrailingActions,
+  Type,
+} from 'react-swipeable-list';
+import 'react-swipeable-list/dist/styles.css';
 
 const Users = () => {
   const dataUsers = [{
     id:1,
     img: avatar,
-    fullName: 'Edward Supratman',
+    fullName: 'Edward Supratmannnnnnnnnnnnnnnnnn',
     email: 'edward@gmail.com',
     verif: false
   },{
@@ -69,10 +75,10 @@ const Users = () => {
     verif: false
   }]
 
-  
+  const [deleteUser, setDeleteUser] = useState(false)
   const [ dataSearch, setDataSearch ] = useState('');
   const [showPopupDetail, setShowPopupDetail] = useState(false)
-const [showPopupDelete, setShowPopupDelete] = useState(false)
+  const [showPopupDelete, setShowPopupDelete] = useState(false)
   const [searchFilteredResult, setSearchFilteredResult] = useState(dataUsers);
 
   useEffect(() => {
@@ -86,6 +92,24 @@ const [showPopupDelete, setShowPopupDelete] = useState(false)
     setSearchFilteredResult(filteredDataSearch); 
   }, [dataSearch]);
 
+  
+
+const trailingActions = () => (
+  <TrailingActions>
+    <div className='w-full flex px-4 gap-5 items-center'>
+    <SwipeAction
+       onClick={()=>setShowPopupDetail(true)}
+    >
+      <IoMdInformationCircle className='text-[30px] hover:scale-125 text-white hover:drop-shadow-[0px_0px_5px_rgba(0,0,0,0.7)] md:text-[40px]'/>
+    </SwipeAction>
+     <SwipeAction
+      onClick={()=>setShowPopupDelete(true)}
+    >
+      <IoMdTrash className='text-[30px] hover:scale-125 text-white hover:drop-shadow-[0px_0px_5px_rgba(0,0,0,0.7)] md:text-[40px]'/> 
+    </SwipeAction></div>
+  </TrailingActions>
+);
+
   return (
     <>
     <section className='h-screen w-full overflow-y-scroll pt-20 md:pt-5 md:ml-4 relative'>
@@ -98,34 +122,35 @@ const [showPopupDelete, setShowPopupDelete] = useState(false)
           eventOnChange={(e) => setDataSearch(e.target.value)} />
           <IoMdSearch className='text-[37px] text-white'/>
       </div>
-      <section className='w-full relative flex flex-wrap gap-2 h-[80vh] md:h-[87vh] lg:h-[85vh] overflow-y-scroll mt-4 md:px-4'>
+      <section className='w-full relative scrollbar-hide flex flex-wrap h-[80vh] md:h-[92vh] lg:h-[87vh] overflow-y-scroll mt-4 md:px-4'>
       {dataUsers.length === 0 ? ( 
         <h1 className='order-1 pt-5 sticky top-0 bg-[#E5BA73] left-0 h-20 right-0 w-full text-[20px] text-center'>Data masih kosong.</h1>
       ) : dataSearch.length > 0 && searchFilteredResult.length === 0 ? (
         <h1 className='order-1 pt-5 sticky top-0 bg-[#E5BA73] left-0 h-20 right-0 w-full text-[20px] text-center'>Pengguna yang dicari tidak ada.</h1>
       ) : (
         searchFilteredResult.map((data) => (
-          <article key={data.id}
-          className='flex order-2 bg-[lightgray]/40 hover:bg-[lightgray] backdrop-blur-md mx-auto w-[75vw] md:w-[37vw] lg:w-[28vw] mb-5 h-fit p-5 gap-5 even:border-black border-l-[11px] rounded-xl hover:translate-y-4 hover:mb-12 hover:scale-110 transition-all duration-300 relative'
+          <section className='rounded-lg bg-slate-500 h-fit w-full border-2 my-2 border-slate-500' key={data.id}>
+          <SwipeableList threshold={2.9} type={Type.IOS}>
+          <SwipeableListItem
+            trailingActions={trailingActions()}
+          >
+          <article
+          className='flex order-2 items-center bg-[lightgray]/40 hover:bg-[lightgray] backdrop-blur-md h-20 w-full even:border-black border-l-[4px] rounded-xl transition-all duration-300 relative'
           > 
-            <img src={data.img} className='w-14 h-14 rounded-full border-2' alt="Profile Picture" />
-            <span className=''>
-            <h1 className='font-semibold text-[19px]'>{data.fullName}</h1>
-            <p>{data.email}</p>
-            <div className='group'>
-              <MdMoreVert className='text-[26px] absolute right-2 top-5 cursor-pointer' onClick={()=>alert('more')}/>
-              <span className='bg-[#E5BA73] rounded-lg rounded-tr-none absolute top-6 right-6 invisible group-hover:visible transition-all duration-100 overflow-hidden cursor-pointer'>
-                <p className='border-b-2 hover:bg-white hover:text-[#E5BA73] p-1' onClick={()=>setShowPopupDetail(true)}>Detail</p>
-                <p className='hover:bg-white hover:text-[#E5BA73] p-1' onClick={()=>setShowPopupDelete(true)}>Hapus</p>
-              </span>
-            </div>
-            </span>
+            <img src={data.img} className='w-14 h-14 ml-2 rounded-full border-2' alt="Profile Picture" />
+            <span className='flex flex-col px-8 truncate'>
+            <h1 className='font-semibold text-[19px] truncate'>{data.fullName}</h1>
+            <p className=''>{data.email}</p></span>
           </article>
+  </SwipeableListItem>
+</SwipeableList></section>
         ))
       )}</section>
     </section>
-    {showPopupDetail && <Popup title={'Detail Pengguna'} eventOnClick={()=>setShowPopupDetail(false)}/>}
-    {showPopupDelete && <Popup title={'Hapus Pengguna'} content={'Anda yakin untuk menghapus akun pengguna ini ?'} btnCancel={true} eventOnClick={()=>setShowPopupDelete(false)}/>}
+    {showPopupDetail && <Popup title={'Detail Pengguna'} eventOnClick={()=>setShowPopupDetail(false)} setIsShow={setShowPopupDetail}/>}
+    {showPopupDelete && <Popup title={'Hapus Pengguna'} content={'Anda yakin untuk menghapus akun pengguna ini ?'} btnCancel={true} setIsShow={setShowPopupDelete} eventOnClick={()=>{
+      setDeleteUser(true)
+      setShowPopupDelete(false)}}/>}
     </>
   );
 };

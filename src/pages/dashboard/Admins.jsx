@@ -86,20 +86,20 @@ const Admins = () => {
   return (
     <>
     <section className='h-screen w-full overflow-y-scroll pt-20 md:pt-5 md:ml-4 relative'>
-      <div className='w-fit mx-auto sticky z-0 top-0 left-0 right-0 flex items-center rounded-xl bg-gray-300/40 border-b-4'>
+      <div className='w-fit mx-auto sticky z-0 top-0 left-0 right-0 flex items-center rounded-xl bg-slate-400 border-b-4 border-slate-500'>
         <InputCustom 
-          placeholder={'Cari pengguna..'}
+          placeholder={'Cari admin..'}
           className={'border-none text-[22px] text-white placeholder:text-white focus:ring-0 w-full md:w-[50vw]'}
           classNameDiv={'py-2'}
           value={dataSearch} 
           eventOnChange={(e) => setDataSearch(e.target.value)} />
           <IoMdSearch className='text-[37px] text-white'/>
       </div>
-      <section className='w-full relative flex flex-wrap gap-2 h-[80vh] md:h-[87vh] lg:h-[85vh] overflow-y-scroll mt-4 md:px-4'>
+      <section className='w-full relative flex flex-wrap gap-2 h-[80vh] md:h-[87vh] lg:h-[85vh] overflow-y-scroll scrollbar-hide mt-4 md:px-4'>
       {dataUsers.length === 0 ? ( 
         <h1 className='order-1 pt-5 sticky top-0 bg-[#E5BA73] left-0 h-20 right-0 w-full text-[20px] text-center'>Data masih kosong.</h1>
       ) : dataSearch.length > 0 && searchFilteredResult.length === 0 ? (
-        <h1 className='order-1 pt-5 sticky top-0 bg-[#E5BA73] left-0 h-20 right-0 w-full text-[20px] text-center'>Admin yang dicari tidak ada.</h1>
+        <h1 className='order-1 pt-5 sticky top-0 bg-[#E5BA73] left-0 h-20 right-0 w-full text-[20px] text-center mx-2'>Admin yang dicari tidak ada.</h1>
       ) : (
         <table className='w-full rounded-t-xl pt-10 m-1'>
           <tr className='border-b-2 sticky -top-1 z-40 bg-slate-200'>
